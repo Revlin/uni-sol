@@ -1,0 +1,17 @@
+% layout 'home';
+% title 'Uni :Sol ::Creative :Control';
+
+    <div id="stream" style="text-align: center">
+	<br />
+      <audio id="aud1" preload="auto" controls="true">
+        <source src="js-demos/audio/stymaps.mp3" />
+        <source src="js-demos/audio/stymaps.ogg" />
+      </audio>
+    </div>
+
+<br /><br /><br />
+  	<div id='mojo-version'>
+		<p><img src="images/triad.png" /></p>
+		<a href="/mojolicious">Mojolicious</a><br /> 
+		v<%= $version %> </div>
+<br /><br /><br />

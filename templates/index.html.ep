@@ -1,0 +1,8 @@
+% layout 'home';
+% title 'Uni :Sol ::Creative :Control';
+<br /><br /><br />
+  	<div id='mojo-version'>
+		<p><img src="images/triad.png" /></p>
+		<a href="/mojolicious">Mojolicious</a><br /> 
+		v<%= $version %> </div>
+<br /><br /><br />

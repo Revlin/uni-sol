@@ -1,0 +1,23 @@
+% layout 'home';
+% title 'Uni :Sol ::Creative :Control';
+<br /><br /><br />
+Uni:Sol is built on the <a href="http://mojolicio.us" target="_blank">Mojolicious real-time web framework!</a><br />
+<br />
+<!--
+If you are a developer who's interested in Mojolicious, check out the link above and also the blog, <a href="my-mojo" target="_blank" style="color:rgb(17,187,255);">My Mojolicious</a><br />
+-->
+<br />
+This page was generated from the template "templates/mojo.html.ep"
+and the default layout defined under the __DATA__ section of our source.<br />
+<a href="<%== url_for %>">Click here</a> to reload the page or
+<a href="/index.html">here</a> to go the home page.
+<br />
+<br />
+Mojolicious v<%= $version %>
+<br />
+<br />
+<% foreach my $parm (split '&', $request ) { 
+	my ($parm_name, $parm_value) = split ': ', $parm if ( $parm ); %>
+	<span style="color:rgb(17,187,255)"><%= $parm_name %></span>: <%= $parm_value %><br />
+	<br />
+<% } %>
