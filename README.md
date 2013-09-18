@@ -1,7 +1,6 @@
 [![Creative Commons Licence](http://i.creativecommons.org/l/by-sa/3.0/nz/88x31.png)](http://creativecommons.org/licenses/by-sa/3.0/nz/deed.en_GB) 
 
 *[Uni:Sol](http://uni-sol.org) by [Revlin John](mailto:stylogicalmaps@gmail.com) is licensed under* 
-
 *[Creative Commons Attribution-ShareAlike 3.0 New Zealand License 2013](http://creativecommons.org/licenses/by-sa/3.0/nz/deed.en_GB).*
 
 ## Uni :Sol ::Creative :Control
