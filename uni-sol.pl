@@ -57,6 +57,13 @@ get '/index.html' => sub {
 	getIndex($self);
 };
 
+get '/vision' => sub {
+	my $self = shift;
+	$self->stash( version => $version ); # stash the url and display in template
+	$self->stash( canvasApp => 'js-demos/scripts/interact-visualizer.js' );
+	$self->render('vision');
+};
+
 get '/visualizer' => sub {
 	my $self = shift;
 	$self->stash( version => $version ); # stash the url and display in template
