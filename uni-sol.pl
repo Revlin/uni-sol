@@ -296,7 +296,7 @@ __DATA__
   <!--[if IE lt 9]><script type="text/javascript">
   try{ document.createElement('canvas').getContext('2d');} catch(e){
 	document.getElementsByTagName('body')[0].onload='';
-	alert("Your browser is missing some essential features and capabilities.\n Please upgrade to a recent release of Internet Explorer");
+	alert("Your browser is missing some essential features and capabilities.\n Please install a recent release of Mozilla Firefox or Google Chrome.");
   }
   </script><![endif]-->
 
