@@ -3,7 +3,8 @@ use Mojolicious::Lite;
 use Mojo::UserAgent;
 use IO::Compress::Gzip 'gzip';
 
-# The port I personally use, which has route redirecting users who connect to port 80 because I don't want to run hypnotoad as root
+# The hypnotoad port I use, which relies on a sytem route to redirect
+# users who connect to port 80, so I don't have to run hypnotoad as root
 app->config( hypnotoad => {listen=>['http://*:8000']} );
 
 my $app = app;
@@ -73,7 +74,8 @@ get '/visualizer' => sub {
 
 get '/mojolicious' => sub {
 	my $self = shift;
-	my $request = join("&", (
+	my $request = join("&", 
+		(
 			'accept: '.$self->req->headers->accept,
 			'accept_encoding: '.$self->req->headers->accept_encoding,
     		#'accept_charset: '.$self->req->headers->accept_charset,
@@ -119,11 +121,12 @@ get '/mojolicious' => sub {
     		#'transfer_encoding: '.$self->req->headers->transfer_encoding,
     		#'upgrade: '.$self->req->headers->upgrade,
     		'user_agent: '.$self->req->headers->user_agent,
-    		#'www_authenticate: '.$self->req->headers->www_authenticate,
-				) ); 
-  $self->stash( version => $version ); # stash the url and display in template
+    		#'www_authenticate: '.$self->req->headers->www_authenticate
+		) 
+	); 
+	$self->stash( version => $version ); # stash the url and display in template
 	$self->stash( canvasApp => 'js-demos/scripts/koch.js' );
-  $self->render('mojo', request=>$request);
+	$self->render('mojo', request=>$request);
 };
 
 get '/my-mojo' => sub {
