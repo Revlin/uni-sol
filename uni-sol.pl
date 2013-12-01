@@ -17,8 +17,6 @@ push @{$static->paths}, ($ENV{PWD});
 # Create new instance of Mojo::UserAgent to use in routes
 my $ua = Mojo::UserAgent->new;
 
-
-
   hook after_render => sub {
     my ($c, $output, $format) = @_;
 
@@ -237,6 +235,33 @@ __DATA__
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=640,user-scalable=no" />
   <link rel='stylesheet' type='text/css' href='styles/new_home.css' />
+  
+</head>
+<body onload="load();">
+  <div id="uni-sol">
+  	<img id='layer1' alt="Blue Earth from space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
+  </div>
+
+  <div id='transparent_background'></div>
+  <div id='home_screen'>
+
+      <div id='trademark'>
+        Uni:Sol::<br />
+        Creative:<br />
+        Control:<br />     
+      </div>
+      <div id='title' class='titles'>
+        <h1>Make Control</h1><br />
+        <span id='mode'>reading: </span>
+        <a id='read_site' href=''></a>
+      </div>
+	  
+	  <div id="content">
+	    <%= content %>
+	  </div>
+	  
+  </div>
+  
   <script type="text/javascript" src="scripts/jquery.min.js"></script>
   <script type="text/javascript" src="scripts/debugger.js"></script>
   <script type='text/javascript'>
@@ -270,32 +295,6 @@ __DATA__
 		}
 	}
   </script>
-  
-</head>
-<body onload="load();">
-  <div id="uni-sol">
-  	<img id='layer1' alt="Blue Earth from space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
-  </div>
-
-  <div id='transparent_background'></div>
-  <div id='home_screen'>
-
-      <div id='trademark'>
-        Uni:Sol::<br />
-        Creative:<br />
-        Control:<br />     
-      </div>
-      <div id='title' class='titles'>
-        <h1>Make Control</h1><br />
-        <span id='mode'>reading: </span>
-        <a id='read_site' href=''></a>
-      </div>
-	  
-	  <div id="content">
-	    <%= content %>
-	  </div>
-	  
-  </div>
   <!--[if IE lt 9]><script type="text/javascript">
   try{ document.createElement('canvas').getContext('2d');} catch(e){
 	document.getElementsByTagName('body')[0].onload='';
