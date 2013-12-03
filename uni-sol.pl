@@ -17,6 +17,19 @@ push @{$static->paths}, ($ENV{PWD});
 # Create new instance of Mojo::UserAgent to use in routes
 my $ua = Mojo::UserAgent->new;
 
+  hook before_dispatch => sub {
+    my $c = shift;
+    my $app = $c->app;
+	my $path = $c->req->url;
+	my $port  = $c->req->url->port;
+	my $base_url = undef;
+    ( $base_url ) = $c->req->url->base =~ /(.+)(\:\d+)/;
+	$app->log->debug("$base_url, $port, $path");
+	$port = ':8080';
+	getFrame($c, $base_url, $port, $path) if( ($base_url =~ /global-survival\.org/) );
+	
+  };
+
   hook after_render => sub {
     my ($c, $output, $format) = @_;
 
@@ -40,6 +53,12 @@ sub getIndex {
 	$self->stash( canvasApp => 'js-demos/scripts/koch.js' );
 	$self->render('index');
 }
+
+sub getFrame {
+	my( $self, $URL, $port, $path ) = @_;
+	$self->stash( url => "$URL$port$path" );
+	$self->render('iframe');
+};
 
 get '/' => sub {
 	my $self = shift;
@@ -219,9 +238,11 @@ sub myMojo {
 	$self->render( inline => ( join "\n", @rendered ) );
 }
 
-# Make sure you change this to a personal password when launching as a live site
-# AND DO NOT GIT COMMIT changes with your personal password showing 
-# (remove just before commit/push and re-insert after )
+# Make sure you change this to a personal password when 
+# launching a live production site AND DO NOT GIT COMMIT 
+# changes with your personal password showing ( 
+# hint: store your pass in a file outside the source tree, 
+# like /home/secret/private/auth/p@$$w0rd.pl or something )
 #
 $app->secret('p@$$w0rd');
 $app->start;
@@ -302,4 +323,17 @@ __DATA__
   }
   </script><![endif]-->
 
+</body></html>
+
+@@ iframe.html.ep
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" style="height:97%;"><head>
+  <title>Global-Survial : GSs</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  
+</head>
+<body style="height:100%;background-color:black;"><iframe 
+		frameborder="0" marginwidth="0" width="100%"  height="100%" 
+		style="width:100%;height:100%;" 
+		src="<%= $url %>" />
 </body></html>
