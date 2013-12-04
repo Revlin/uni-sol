@@ -23,10 +23,13 @@ my $ua = Mojo::UserAgent->new;
 	my $path = $c->req->url;
 	my $port  = $c->req->url->port;
 	my $base_url = undef;
-    ( $base_url ) = $c->req->url->base =~ /(.+)(\:\d+)/;
+    ( $base_url, $port ) = $c->req->url->base =~ /(.+\.org)(\:\d+)?/;
 	$app->log->debug("$base_url, $port, $path");
-	$port = ':8080';
-	getFrame($c, $base_url, $port, $path) if( ($base_url =~ /global-survival\.org/) );
+	if( ($base_url =~ /global-survival\.org/) ) {
+		my $title = "Global-Survival/GSs : Netention";
+		$port = ':8080';
+		getFrame($c, $base_url, $port, $path, $title);
+	}
 	
   };
 
@@ -55,8 +58,9 @@ sub getIndex {
 }
 
 sub getFrame {
-	my( $self, $URL, $port, $path ) = @_;
+	my( $self, $URL, $port, $path, $title ) = @_;
 	$self->stash( url => "$URL$port$path" );
+	$self->stash( title => $title );
 	$self->render('iframe');
 };
 
@@ -328,7 +332,7 @@ __DATA__
 @@ iframe.html.ep
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
 <html xmlns="http://www.w3.org/1999/xhtml" style="height:97%;"><head>
-  <title>Global-Survial : GSs</title>
+  <title><%= $title %></title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   
 </head>
