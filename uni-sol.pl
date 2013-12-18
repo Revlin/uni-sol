@@ -22,10 +22,10 @@ my $ua = Mojo::UserAgent->new;
     my $app = $c->app;
 	my $path = $c->req->url;
 	my $port  = $c->req->url->port;
-	my $base_url = undef;
+	my $base_url = '';
     ( $base_url, $port ) = $c->req->url->base =~ /(.+\.org)(\:\d+)?/;
-	$app->log->debug("$base_url, $port, $path");
-	if( ($base_url =~ /global-survival\.org/) ) {
+	$app->log->debug("$base_url, $port, $path") if( $base_url );
+	if( ($base_url) && ($base_url =~ /global-survival\.org/) ) {
 		my $title = "Global-Survival/GSs : Netention";
 		$port = ':8080';
 		getFrame($c, $base_url, $port, $path, $title);
@@ -302,7 +302,7 @@ __DATA__
     });
   </script>
   
-  <script type="text/javascript" src="<%= $canvasApp %>"></script>
+  <script type="text/javascript" id="cvSrc" src="<%= $canvasApp %>"></script>
   <script type="text/javascript">
 	function load() {
 		var canvas=document.createElement("canvas");
