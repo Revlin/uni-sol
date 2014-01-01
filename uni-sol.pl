@@ -276,7 +276,7 @@ __DATA__
         Control:<br />     
       </div>
       <div id='title' class='titles'>
-        <h1>Make Control</h1><br />
+        <h1>Share The Dream</h1><br />
         <span id='mode'>reading: </span>
         <a id='read_site' href=''></a>
       </div>
