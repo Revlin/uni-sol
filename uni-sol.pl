@@ -264,7 +264,7 @@ __DATA__
 </head>
 <body onload="load();">
   <div id="uni-sol">
-  	<img id='layer1' alt="Blue Earth from space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
+  	<img id='layer1' alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
   </div>
 
   <div id='transparent_background'></div>
@@ -307,6 +307,16 @@ __DATA__
 	function load() {
 		var canvas=document.createElement("canvas");
 		document.getElementById('uni-sol').replaceChild( canvas, document.getElementById("layer1") );
+		canvas.addEventListener( "click", function(evt) {
+			var git_link = document.getElementById("js-demos");
+			event = document.createEvent( "MouseEvent" );
+			event.initEvent( evt.type, true, true );
+			for( var e in evt ){
+				event[e] = evt[e];
+			}
+			evt.preventDefault();
+			git_link.dispatchEvent(event, true);
+		}, false );
 		canvasApp(canvas);
 		if (typeof Debugger === "function") { 
 			Debugger.on = false;
@@ -326,6 +336,8 @@ __DATA__
 	alert("Your browser is missing some essential features and capabilities.\n Please install a recent release of Mozilla Firefox or Google Chrome.");
   }
   </script><![endif]-->
+  
+<a id="js-demos" href="https://github.com/Revlin/js-demos" target="_blank"></a>
 
 </body></html>
 
