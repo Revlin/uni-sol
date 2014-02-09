@@ -309,6 +309,7 @@ __DATA__
 		document.getElementById('uni-sol').replaceChild( canvas, document.getElementById("layer1") );
 		canvas.addEventListener( "click", function(evt) {
 			var git_link = document.getElementById("js-demos");
+			git_link.target = "_blank";
 			event = document.createEvent( "MouseEvent" );
 			event.initEvent( evt.type, true, true );
 			for( var e in evt ){
@@ -330,14 +331,14 @@ __DATA__
 		}
 	}
   </script>
-  <!--[if IE lt 9]><script type="text/javascript">
+  <!--[if lt IE 9]><script type="text/javascript">
   try{ document.createElement('canvas').getContext('2d');} catch(e){
 	document.getElementsByTagName('body')[0].onload='';
 	alert("Your browser is missing some essential features and capabilities.\n Please install a recent release of Mozilla Firefox or Google Chrome.");
   }
   </script><![endif]-->
   
-<a id="js-demos" href="https://github.com/Revlin/js-demos" target="_blank"></a>
+<a id="js-demos" href="https://github.com/Revlin/js-demos"></a>
 
 </body></html>
 
@@ -346,6 +347,7 @@ __DATA__
 <html xmlns="http://www.w3.org/1999/xhtml" style="height:97%;"><head>
   <title><%= $title %></title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel='stylesheet' type='text/css' href='http://uni-sol.org/styles/new_home.css' />
   
 </head>
 <body style="height:100%;background-color:black;"><iframe 
