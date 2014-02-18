@@ -89,11 +89,17 @@ body {
   color: 				#a277ff;
 }
 
+* pre {
+    display: block;
+    max-width: 480px;
+    overflow-x: auto;
+}
+
 div#transparent_background {
   position: 			relative;
   width: 				640px;
   min-width: 			540px;
-  min-height: 			3200px;
+  min-height: 			6400px;
   margin: 				0 auto 0 auto;
   background-color: 	rgb(25, 25, 25);
   opacity:				0.75; 
@@ -102,7 +108,7 @@ div#transparent_background {
 
 div#home_screen {
   position: 			relative;
-  margin: 				-3200px auto 0 auto;
+  margin: 				-6400px auto 0 auto;
   width: 				640px;
   min-width: 			460px;
   min-height: 			100%;
