@@ -1,7 +1,12 @@
 #!/usr/bin/perl
 use Mojolicious::Lite;
 use Mojo::UserAgent;
+use Mojo::Log;
+
+# Additional modules requirements
 use IO::Compress::Gzip 'gzip';
+use Markdent::Parser;
+use Markdent::Handler::HTMLStream::Fragment;
 
 # The hypnotoad port I use, which relies on a sytem route to redirect
 # users who connect to port 80, so I don't have to run hypnotoad as root
@@ -48,14 +53,14 @@ my $ua = Mojo::UserAgent->new;
     gzip $output, \my $compressed;
     $$output = $compressed;
   };
-
+  
+  
 sub getIndex {
 	my $self = shift;
 	my $URL = $self->req->url->base;
 	$self->stash( url => $URL, version => $version ); # stash the url and display in template
-	$self->stash( canvasApp => 'js-demos/scripts/koch.js' );
 	$self->render('index');
-}
+};
 
 sub getFrame {
 	my( $self, $URL, $port, $path, $title ) = @_;
@@ -63,6 +68,114 @@ sub getFrame {
 	$self->stash( title => $title );
 	$self->render('iframe');
 };
+
+sub getReadme {
+	my( $self, $readme ) = @_;
+	my $URL = $self->req->url->base;
+	my( $fh, $mh, $save_line_sep );
+	my $mark2html = '';
+	open $mh, '>', \$mark2html;
+	my $mark = Markdent::Parser->new(
+		dialect => 'GitHub',
+		handler => Markdent::Handler::HTMLStream::Fragment->new(
+			output => $mh
+		)
+	);
+	
+	open $fh, '<'.$readme;
+	$save_line_sep = $/; # Save line seperator vaule
+    undef $/; # Allows one pass input of entire file
+	$mark->parse( markdown => <$fh> );
+    $/ = $save_line_sep; # Restore line seprator
+	close $fh;
+	close $mh;
+	
+	$self->stash( 
+		url => $URL, 
+		version => $version, 
+		mark2html => $mark2html 
+	);
+	$self->render('readme');
+};
+
+sub rel2AbsURI {
+	my( $gotten, $abspath, $apppath ) = @_;
+	my $log = Mojo::Log->new();
+	$log->debug( "abspath: $abspath, apppath: $apppath \n" );
+	my (@gotten, @rendered, $responce);
+	@gotten = split( "\n", $gotten );
+
+	for my $fline (@gotten) {
+		# Make sure that linked resources use absolute URIs
+		if ( ($fline =~ /(<a)/) and ($fline =~ /(href=){1}(\'?)(\"?)((\w|\-|\_|\/|\.|\#)+)(\'?)(\"?)/) ) {
+			my $resname = $4;
+			$log->debug( "<!--Resource $resname -->\n" );
+			unless( $fline =~ /(http\:|javascript\:|mailto\:|\/\/)/ ) {
+				if( $resname ) {
+					$fline =~ s/$resname/$apppath$resname/;
+				} 
+			}
+			$log->debug( $fline."\n" );
+			$responce = $fline;
+
+		} elsif ( ($fline =~ /(<link)/) and ($fline =~ /stylesheet/) and ($fline =~ /(href=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ) {
+			my $resname = $4;
+			$log->debug( "<!--Resource $resname -->\n" );
+			unless( $fline =~ /(http\:|javascript\:|mailto\:|\/\/)/ ) {
+				$fline =~ s/$resname/$apppath$resname/;
+				$log->debug( $fline."\n" );
+			} 
+			$responce = $fline;
+
+		} elsif ( ($fline =~ /(<script)/) and ($fline =~ /(src=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ) {
+			my $resname = $4;
+			$log->debug( "<!--Resource $resname -->\n" );
+			unless( $fline =~ /(http\:|javascript\:|mailto\:|\/\/)/ ) {
+				$fline =~ s/$resname/$apppath$resname/;
+				$log->debug( $fline."\n" );
+			} 
+			$responce = $fline;
+    
+		} elsif ( ($fline =~ /(<iframe)/) and ($fline =~ /(src=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ) {
+			my $resname = $4;
+			$log->debug( "<!--Resource $resname -->\n" );
+			unless ($fline =~ /http\:/) {
+				$fline =~ s/$resname/$apppath$resname/;
+				$log->debug( $fline."\n" );
+			} 
+			$responce = $fline;
+
+		} elsif ( ($fline =~ /(<img)/s) and ($fline =~ /(src=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ){
+			my $resname = $4;
+			$log->debug( "<!--Resource $resname -->\n" );
+			unless ($fline =~ /http\:/) {
+				$fline =~ s/$resname/$apppath$resname/;
+				$log->debug( $fline."\n" );
+			} 
+			$responce = $fline;
+ 
+		} elsif ( ($fline =~ /(<source)/s) and ($fline =~ /(src=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ){
+			my $resname = $4;
+			$log->debug( "<!--Resource $resname -->\n" );
+			unless ($fline =~ /http\:/) {
+				$fline =~ s/$resname/$apppath$resname/;
+				$log->debug( $fline."\n" );
+			} 
+			$responce = $fline;
+      
+		}  else {
+			$responce = $fline;
+		}
+		@rendered = (@rendered, $responce);
+	}
+	
+	return( inline => ( join "\n", @rendered ) );
+};
+
+# Import routes from submodules (if they exist)
+#do qq{my-mojo/uni-sol.pl};
+do qq{js-demos/uni-sol.pl};
+do qq{svg-demos/uni-sol.pl};
 
 get '/' => sub {
 	my $self = shift;
@@ -79,18 +192,14 @@ get '/index.html' => sub {
 	getIndex($self);
 };
 
-get '/vision' => sub {
+get '/readme' => sub {
 	my $self = shift;
-	$self->stash( version => $version ); # stash the url and display in template
-	$self->stash( canvasApp => 'js-demos/scripts/interact-visualizer.js' );
-	$self->render('vision');
+	getReadme($self, 'README.md');
 };
 
-get '/visualizer' => sub {
+get '/license' => sub {
 	my $self = shift;
-	$self->stash( version => $version ); # stash the url and display in template
-	$self->stash( canvasApp => 'js-demos/scripts/interact-visualizer.js' );
-	$self->render('visualizer');
+	getReadme($self, 'LICENSE.md');
 };
 
 get '/mojolicious' => sub {
@@ -150,97 +259,6 @@ get '/mojolicious' => sub {
 	$self->render('mojo', request=>$request);
 };
 
-get '/my-mojo' => sub {
-	# Redirect to My Mojolicious blog
-	my $self = shift;
-	my ($getp, $geta) = (0, 0);
-	$getp = $self->param('p') if( $self->param('p') );
-	$geta = $self->param('p') if( $self->param('a') );
-	myMojo($self, $getp, $geta);
-};
-	
-sub myMojo {
-	my ($self, $getp, $geta) = @_;
-	my (@gotten, @rendered);
-	my ($responce, $gotten);
-	my $apppath = $self->req->url->base.'/my-mojo/';
-	my $abspath = 'http://uni-sol.ca:81/';
-	if( $getp ) {
-		$gotten = $ua->get($abspath."?p=$getp")->res->dom;
-	} elsif( $geta ) {
-		$gotten = $ua->get($abspath."?author=$geta")->res->dom;
-	} else {
-		$gotten = $ua->get($abspath)->res->dom;
-	}
-	@gotten = split( "\n", $gotten );
-
-	for my $fline (@gotten) {
-		# Make sure that linked resources use absolute URIs
-		if ( ($fline =~ /(<a)/) and ($fline =~ /(href=){1}(\'?)(\"?)((\w|\-|\_|\/|\.|\#)+)(\'?)(\"?)/) ) {
-			my $resname = $4;
-			print "<!--Resource $resname -->\n";
-			unless( $fline =~ /(http\:|javascript\:|mailto\:|\/\/)/ ) {
-				if( $resname ) {
-					$fline =~ s/$resname/$apppath$resname/;
-				} 
-			} else {
-				$fline =~ s/$abspath/$apppath/;
-			}
-			print $fline."\n";
-			$responce = $fline;
-
-		} elsif ( ($fline =~ /(<link)/) and ($fline =~ /stylesheet/) and ($fline =~ /(href=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ) {
-			my $resname = $4;
-			print "<!--Resource $resname -->\n";
-			unless( $fline =~ /(http\:|javascript\:|mailto\:|\/\/)/ ) {
-					$fline =~ s/$resname/$abspath$resname/;
-					#print $fline."\n";
-			} 
-			$responce = $fline;
-
-		} elsif ( ($fline =~ /(<script)/) and ($fline =~ /(src=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ) {
-			my $resname = $4;
-			print "<!--Resource $resname -->\n";
-			unless( $fline =~ /(http\:|javascript\:|mailto\:|\/\/)/ ) {
-				$fline =~ s/$resname/$abspath$resname/;
-				#print $fline."\n";
-			} 
-			$responce = $fline;
-    
-		} elsif ( ($fline =~ /(<iframe)/) and ($fline =~ /(src=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ) {
-			my $resname = $4;
-			print "<!--Resource $resname -->\n";
-			unless ($fline =~ /http\:/) {
-				$fline =~ s/$resname/$abspath$resname/;
-				#print $fline."\n";
-			} 
-			$responce = $fline;
-
-		} elsif ( ($fline =~ /(<img)/s) and ($fline =~ /(src=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ){
-			my $resname = $4;
-			print "<!--Resource $resname -->\n";
-			unless ($fline =~ /http\:/) {
-				$fline =~ s/$resname/$abspath$resname/;
-				#print $fline."\n";
-			} 
-			$responce = $fline;
- 
-		} elsif ( ($fline =~ /(<source)/s) and ($fline =~ /(src=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ){
-			my $resname = $4;
-			print "<!--Resource $resname -->\n";
-			unless ($fline =~ /http\:/) {
-				$fline =~ s/$resname/$abspath$resname/;
-				#print $fline."\n";
-			} 
-			$responce = $fline;
-      
-		}  else {
-			$responce = $fline;
-		}
-		@rendered = (@rendered, $responce);
-	}
-	$self->render( inline => ( join "\n", @rendered ) );
-}
 
 # Make sure you change this to a personal password when 
 # launching a live production site AND DO NOT GIT COMMIT 
@@ -262,9 +280,9 @@ __DATA__
   <link rel='stylesheet' type='text/css' href='styles/new_home.css' />
   
 </head>
-<body onload="load();">
+<body <%{ no strict 'vars'; if($canvasApp) { %>onload="load();"<% } } %> >
   <div id="uni-sol">
-  	<img id='layer1' alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
+  	<img id="layer1" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
   </div>
 
   <div id='transparent_background'></div>
@@ -286,21 +304,28 @@ __DATA__
 	  </div>
 	  
   </div>
-  
+
   <script type="text/javascript" src="scripts/jquery.min.js"></script>
   <script type="text/javascript" src="scripts/debugger.js"></script>
   <script type='text/javascript'>
-    $(function() {
-	  jQblink = function($obj, t) {
-	    $obj.fadeOut(t);
-		$obj.fadeIn(t);
-		return $obj;
+    jQuery(function() {
+	  jQblink = function(jqObj, t) {
+	    jqObj.fadeOut(t);
+		jqObj.fadeIn(t);
+		return jqObj;
 	  };
-      $(window).scrollTop(2);
-      $('#read_site')[0].innerHTML = (window.location.host)? window.location.host : window.location;
-	  jQblink( jQblink( jQblink($('#mode'),600), 600), 600);
+      jQuery(window).scrollTop(2);
+      jQuery('#read_site')[0].innerHTML = (window.location.host)? window.location.host : window.location;
+	  jQblink( jQblink( jQblink(jQuery('#mode'),600), 600), 600);
     });
   </script>
+
+<% 
+{ 
+	no strict 'vars';
+  	if( defined $canvasApp ) { 
+	# If URI for a Canvas app is provided, initialize "uni-sol">"layer1"
+%>
   
   <script type="text/javascript" id="cvSrc" src="<%= $canvasApp %>"></script>
   <script type="text/javascript">
@@ -331,6 +356,12 @@ __DATA__
 		}
 	}
   </script>
+ 
+<%
+	}
+} 
+%>
+  
   <!--[if lt IE 9]><script type="text/javascript">
   try{ document.createElement('canvas').getContext('2d');} catch(e){
 	document.getElementsByTagName('body')[0].onload='';

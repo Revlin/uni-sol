@@ -1,6 +1,7 @@
 ## Peer Production License
 
 THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS COPYFARLEFT PUBLIC LICENSE (“LICENSE”). THE WORK IS PROTECTED BY COPYRIGHT AND ALL OTHER APPLICABLE LAWS. ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS LICENSE OR COPYRIGHT LAW IS PROHIBITED. BY EXERCISING ANY RIGHTS TO THE WORK PROVIDED IN THIS LICENSE, YOU AGREE TO BE BOUND BY THE TERMS OF THIS LICENSE. TO THE EXTENT THIS LICENSE MAY BE CONSIDERED TO BE A CONTRACT, THE LICENSOR GRANTS YOU THE RIGHTS CONTAINED HERE IN AS CONSIDERATION FOR ACCEPTING THE TERMS AND CONDITIONS OF THIS LICENSE AND FOR AGREEING TO BE BOUND BY THE TERMS AND CONDITIONS OF THIS LICENSE.
+
 1. DEFINITIONS
 
     a. “Adaptation” means a work based upon the Work, or upon the Work and other preex isting works, such as a translation, adaptation, derivative work, arrangement of music or other alterations of a literary or artistic work, or phonogram or performance and includes cinematographic adaptations or any other form in which the Work may be recast, trans formed, or adapted including in any form recognizably derived from the original, except that a work that constitutes a Collection will not be considered an Adaptation for the pur pose of this License. For the avoidance of doubt, where the Work is a musical work, perfor mance or phonogram, the synchronization of the Work in timedrelation with a moving image (“synching”) will be considered an Adaptation for the purpose of this License. 

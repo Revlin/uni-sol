@@ -1,0 +1,15 @@
+% layout 'home';
+% title 'Uni :Sol ::Creative :Control';
+<br />
+<br />
+<% 
+my $log = Mojo::Log->new();
+#$log->debug( "$mark2html\n" );
+%>
+<%== $mark2html %>
+<br /><br />
+  	<div id='mojo-version'>
+		<p><img src="images/triad.png" /></p>
+		<a href="/mojolicious">Mojolicious</a><br /> 
+		v<%= $version %> </div>
+<br /><br /><br />
