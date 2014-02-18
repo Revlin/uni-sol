@@ -5,13 +5,10 @@
 </h1>
 <p>We value the perpetual expansion of creative techniques with the purpose of <em>re-defining the imagination</em>. We believe that the only solutions to emerging challenges are products of the imagination. In order to integrate these products into the personal, communal and global awareness, we require both pragmatic and visionary aids to development.
 </p><br />
-    <div id="stream" style="text-align: center">
-	<br />
-      <audio id="aud1" preload="auto" controls="true">
-        <source src="js-demos/audio/fathers.mp3" />
-        <source src="js-demos/audio/fathers.ogg" />
-      </audio>
-    </div>
+<%== 
+$mediaDIV 
+%>
+<br />
 <p>Uni:Sol is a <strong>creators collaborative</strong> (CC). This site provides resources to aid each author in the development of new interactive material. Use of this material by visitors generates revenue and a small portion of that revenue supports the management, provisioning, and further development of on-site resources. Both on-site resources and author-generated material are perpetually evolving.
 </p><br />
 
