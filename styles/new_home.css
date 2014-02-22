@@ -30,6 +30,7 @@ body {
   color: 				#e3ddff;
   text-align: 			left;
   line-height: 			115%;
+  overflow-y: 			scroll;
 }
 
 * iframe {
@@ -176,11 +177,29 @@ div#content div#mojo-version * {
 	margin-left:	8px;
 }
 
-div#content div#mojo-version * img{
+div#content div#mojo-version * img {
 	width:			72px;
 	height:			72px;
 	margin-left:	-4px;
 	margin-bottom:	-14px;
+}
+
+div#control {
+	position: 		fixed;
+	bottom:			4px;
+	width:			100%;
+	text-align:		center;
+	background-color: transparent;
+}
+
+div#control #toggle_control {
+	display:		inline-block;
+	color:			#FFF;
+	padding-top:	2px;
+	min-height:		22px;
+	min-width: 		256px;
+	max-width:		256px;
+	background-image: url('../images/txt_bubble.png');
 }
 
 #uni-sol {

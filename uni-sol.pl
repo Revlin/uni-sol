@@ -12,9 +12,9 @@ use Markdent::Handler::HTMLStream::Fragment;
 # users who connect to port 80, so I don't have to run hypnotoad as root
 app->config( hypnotoad => {listen=>['http://*:8000']} );
 
-my $app = app;
-my $version = Mojolicious->VERSION;
+our $version = Mojolicious->VERSION;
 
+my $app = app;
 # Add current working directory as path to static files
 my $static = $app->static;
 push @{$static->paths}, ($ENV{PWD});
@@ -172,22 +172,7 @@ sub rel2AbsURI {
 	return( inline => ( join "\n", @rendered ) );
 };
 
-# Import routes from submodules (if they exist)
-#do qq{my-mojo/uni-sol.pl};
-do qq{js-demos/uni-sol.pl};
-do qq{svg-demos/uni-sol.pl};
-
 get '/' => sub {
-	my $self = shift;
-	getIndex($self);
-};
-
-get '/index' => sub {
-	my $self = shift;
-	getIndex($self);
-};
-
-get '/index.html' => sub {
 	my $self = shift;
 	getIndex($self);
 };
@@ -259,6 +244,11 @@ get '/mojolicious' => sub {
 	$self->render('mojo', request=>$request);
 };
 
+# Import routes from submodules (if they exist)
+#do qq{my-mojo/uni-sol.pl};
+do qq{js-demos/uni-sol.pl};
+do qq{svg-demos/uni-sol.pl};
+
 
 # Make sure you change this to a personal password when 
 # launching a live production site AND DO NOT GIT COMMIT 
@@ -294,7 +284,17 @@ __DATA__
         Control:<br />     
       </div>
       <div id='title' class='titles'>
-        <h1>Share The Dream</h1><br />
+        <h1><%
+{ 
+	no strict 'vars';
+	if( defined $header ) { 
+		%><%= $header %><%
+	} else { 
+		%>Make Control<%
+		1;
+	}
+}	
+		%></h1><br />
         <span id='mode'>reading: </span>
         <a id='read_site' href=''></a>
       </div>
@@ -304,21 +304,14 @@ __DATA__
 	  </div>
 	  
   </div>
+	  
+  <div id="control">
+  	<a id="toggle_control" href="#"></a>
+  </div>
 
   <script type="text/javascript" src="scripts/jquery.min.js"></script>
   <script type="text/javascript" src="scripts/debugger.js"></script>
-  <script type='text/javascript'>
-    jQuery(function() {
-	  jQblink = function(jqObj, t) {
-	    jqObj.fadeOut(t);
-		jqObj.fadeIn(t);
-		return jqObj;
-	  };
-      jQuery(window).scrollTop(2);
-      jQuery('#read_site')[0].innerHTML = (window.location.host)? window.location.host : window.location;
-	  jQblink( jQblink( jQblink(jQuery('#mode'),600), 600), 600);
-    });
-  </script>
+  <script type="text/javascript" src="scripts/control.js"></script>
 
 <% 
 { 
@@ -326,7 +319,6 @@ __DATA__
   	if( defined $canvasApp ) { 
 	# If URI for a Canvas app is provided, initialize "uni-sol">"layer1"
 %>
-  
   <script type="text/javascript" id="cvSrc" src="<%= $canvasApp %>"></script>
   <script type="text/javascript">
 	function load() {
@@ -356,7 +348,6 @@ __DATA__
 		}
 	}
   </script>
- 
 <%
 	}
 } 

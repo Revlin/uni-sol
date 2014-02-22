@@ -6,7 +6,7 @@ Uni:Sol is built on the <a href="http://mojolicio.us" target="_blank">Mojoliciou
 This page was generated from the template "templates/mojo.html.ep"
 and the default layout defined under the __DATA__ section of our source.<br />
 <a href="<%== url_for %>">Click here</a> to reload the page or
-<a href="/index.html">here</a> to go the home page.
+<a href="/">here</a> to go the home page.
 <br />
 <br />
 Mojolicious v<%= $version %>
