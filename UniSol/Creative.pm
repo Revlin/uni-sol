@@ -1,5 +1,5 @@
 package UniSol::Creative;
 use warnings;
-use	strict;
+use strict;
 
 1;

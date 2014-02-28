@@ -28,7 +28,7 @@ my $ua = Mojo::UserAgent->new;
 	my $path = $c->req->url;
 	my $port  = $c->req->url->port;
 	my $base_url = '';
-    ( $base_url, $port ) = $c->req->url->base =~ /(.+\.org)(\:\d+)?/;
+    ( $base_url, $port ) = $c->req->url->base =~ /(.*[\w|\-|\.]+)(\:\d+)?/;
 	$app->log->debug("$base_url, $port, $path") if( $base_url );
 	if( ($base_url) && ($base_url =~ /global-survival\.org/) ) {
 		my $title = "Global-Survival/GSs : Netention";
@@ -375,5 +375,5 @@ __DATA__
 <body style="height:100%;background-color:black;"><iframe 
 		frameborder="0" marginwidth="0" width="100%"  height="100%" 
 		style="width:100%;height:100%;" 
-		src="<%= $url %>" />
+		src="<%= $url %>" ></iframe>
 </body></html>
