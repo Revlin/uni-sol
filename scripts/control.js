@@ -15,13 +15,6 @@
 	  } ).html( 
 	  	"Hide Control" 
 	  );
-		
-		jQuery('img').load(function(idx) {
-			if( this.src.match(/\.svg/) !== null ) {
-				this.style.width = "480px";
-				this.style.height = "270px";
-			}
-		});
     });
 	
 	function toggleControl( on_off, $this ) {
@@ -55,3 +48,12 @@
 		}
 		return true;
 	}
+
+	setTimeout( function() {
+		jQuery('img').each(function() {
+			if( this.src.match(/\.svg/) !== null ) {
+				this.style.width = "480px";
+				this.style.height = "270px";
+			}
+		} );		  
+	}, 333);
