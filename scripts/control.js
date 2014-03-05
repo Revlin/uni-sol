@@ -15,6 +15,13 @@
 	  } ).html( 
 	  	"Hide Control" 
 	  );
+		
+		jQuery('img').each(function(idx) {
+			if( this.src.match(/svg/) !== null ) {
+				this.style.width = "480px";
+				this.style.width = "270px";
+			}
+		});
     });
 	
 	function toggleControl( on_off, $this ) {
