@@ -16,7 +16,7 @@
 	  	"Hide Control" 
 	  );
 		
-		jQuery('img').each(function(idx) {
+		jQuery('img').load(function(idx) {
 			if( this.src.match(/\.svg/) !== null ) {
 				this.style.width = "480px";
 				this.style.height = "270px";
