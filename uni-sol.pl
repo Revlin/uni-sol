@@ -306,7 +306,7 @@ __DATA__
   </div>
 	  
   <div id="control">
-  	<a id="toggle_control" href="#"></a>
+  	<a id="toggle_control" href="."></a>
   </div>
 
   <script type="text/javascript" src="scripts/jquery.min.js"></script>
@@ -348,6 +348,9 @@ __DATA__
 		}
 	}
   </script>
+  
+<a id="js-demos" href="https://github.com/Revlin/js-demos#readme"></a>
+
 <%
 	}
 } 
@@ -359,8 +362,6 @@ __DATA__
 	alert("Your browser is missing some essential features and capabilities.\n Please install a recent release of Mozilla Firefox or Google Chrome.");
   }
   </script><![endif]-->
-  
-<a id="js-demos" href="https://github.com/Revlin/js-demos"></a>
 
 </body></html>
 

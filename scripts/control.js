@@ -1,10 +1,13 @@
 	jQuery(function() {
+    /* Simple interface controls for home screen */
+    
 	  jQblink = function($obj, t) {
 	    $obj.fadeOut(t);
 		$obj.fadeIn(t);
 		return $obj;
 	  };
       jQuery(window).scrollTop(2);
+	
       jQuery('#read_site')[0].innerHTML = (window.location.host)? window.location.host : window.location;
 	  jQblink( jQblink( jQblink(jQuery('#mode'),600), 600), 600);
 	  
@@ -14,14 +17,8 @@
 		return toggleControl( 'off', $this );
 	  } ).html( 
 	  	"Hide Control" 
-	  );
-		
-		jQuery('img').each(function(idx) {
-			if( this.src.match(/\.svg/) !== null ) {
-				this.style.width = "480px";
-				this.style.height = "270px";
-			}
-		});
+	  ).attr('href', "#null");
+        
     });
 	
 	function toggleControl( on_off, $this ) {
