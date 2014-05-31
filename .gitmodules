@@ -4,3 +4,6 @@
 [submodule "svg-demos"]
 	path = svg-demos
 	url = https://github.com/Revlin/svg-demos.git
+[submodule "revlin"]
+	path = revlin
+	url = https://github.com/Revlin/revlin.git
