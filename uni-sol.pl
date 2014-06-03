@@ -270,9 +270,13 @@ __DATA__
   <link rel='stylesheet' type='text/css' href='styles/new_home.css' />
   
 </head>
-<body <%{ no strict 'vars'; if($canvasApp) { %>onload="load();"<% } } %> >
+<body <%{ no strict 'vars'; if( (defined $canvasApp) || (defined $svgApp) ){ %>onload="load();"<% } } %> >
   <div id="uni-sol">
-  	<img id="layer1" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
+  	<!--div class="cycle-slideshow" style="z-index: -1"
+	  data-cycle-loop="1" data-cycle-allow-wrap="false" data-cycle-speed="1500" data-cycle-reverse="false">
+  		<img id="layer0" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" /-->
+  		<img id="layer1" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
+  	<!--/div-->
   </div>
 
   <div id='transparent_background'></div>
@@ -287,7 +291,7 @@ __DATA__
         <h1><%
 { 
 	no strict 'vars';
-	if( defined $header ) { 
+	if( defined $header ) {
 		%><%= $header %><%
 	} else { 
 		%>Make Control<%
@@ -310,13 +314,14 @@ __DATA__
   </div>
 
   <script type="text/javascript" src="scripts/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/cycle2/build/jquery.cycle2.min.js"></script>
   <script type="text/javascript" src="scripts/debugger.js"></script>
   <script type="text/javascript" src="scripts/control.js"></script>
 
 <% 
 { 
 	no strict 'vars';
-  	if( defined $canvasApp ) { 
+  	if( defined $canvasApp ){ 
 	# If URI for a Canvas app is provided, initialize "uni-sol">"layer1"
 %>
   <script type="text/javascript" id="cvSrc" src="<%= $canvasApp %>"></script>
@@ -351,6 +356,26 @@ __DATA__
   
 <a id="js-demos" href="https://github.com/Revlin/js-demos#readme"></a>
 
+<%
+	} elsif( defined $svgApp ) { 
+	# If URI for an SVG file is provided, initialize "uni-sol">"layer1"
+%>
+  <script type="text/javascript">
+	function load() {
+		document.getElementById("layer1").src = "<%= $svgApp %>";
+		if (typeof Debugger === "function") { 
+			Debugger.on = false;
+			return; 
+		} else {
+			window.Debugger = {
+				log: function() {
+					/* no debugger.js */
+				}
+			};
+		}
+	}
+  </script>
+	
 <%
 	}
 } 

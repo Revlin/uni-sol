@@ -209,7 +209,7 @@ div#control #toggle_control {
 	background-image: url('../images/txt_bubble.png');
 }
 
-#uni-sol {
+* #uni-sol {
 	position:		fixed;
 	display:		block;
 	top:			0;
@@ -221,6 +221,42 @@ div#control #toggle_control {
 	overflow:		hidden;
 }
 
-#uni-sol #layer1 {
+* #layer0 {
+	width:			100%;
+}
+
+* #layer1 {
+	width:			100%;
+}
+
+* #layer2 {
+	width:			100%;
+}
+
+* #layer3 {
+	width:			100%;
+}
+
+* #layer4 {
+	width:			100%;
+}
+
+* #layer5 {
+	width:			100%;
+}
+
+* #layer6 {
+	width:			100%;
+}
+
+* #layer7 {
+	width:			100%;
+}
+
+* #layer8 {
+	width:			100%;
+}
+
+* #layer9 {
 	width:			100%;
 }
