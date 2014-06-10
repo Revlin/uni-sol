@@ -192,6 +192,12 @@ div#content div#mojo-version * img {
 	margin-bottom:	-14px;
 }
 
+div#content div.revlin * img {
+	position:		relative;
+	width:			320px;
+	margin-bottom: 	-1px;
+}
+
 div#control {
 	position: 		fixed;
 	bottom:			4px;
