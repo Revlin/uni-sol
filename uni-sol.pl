@@ -271,6 +271,11 @@ __DATA__
   <meta name="viewport" content="width=640,user-scalable=no" />
   <link rel='stylesheet' type='text/css' href='styles/new_home.css' />
   
+  <script type="text/javascript" src="scripts/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/cycle2/build/jquery.cycle2.min.js"></script>
+  <script type="text/javascript" src="scripts/debugger.js"></script>
+  <script type="text/javascript" src="scripts/control.js"></script>
+  
 </head>
 <body <%{ no strict 'vars'; if( (defined $canvasApp) || (defined $svgApp) ){ %>onload="load();"<% } } %> >
   <div id="uni-sol">
@@ -322,84 +327,6 @@ __DATA__
   <div id="control">
   	<a id="toggle_control" href="."></a>
   </div>
-
-  <script type="text/javascript" src="scripts/jquery.min.js"></script>
-  <script type="text/javascript" src="scripts/cycle2/build/jquery.cycle2.min.js"></script>
-  <script type="text/javascript" src="scripts/debugger.js"></script>
-  <script type="text/javascript" src="scripts/control.js"></script>
-
-<% 
-{ 
-	no strict 'vars';
-  	if( defined $canvasApp ){ 
-	# If URI for a Canvas app is provided, initialize "uni-sol">"layer1"
-%>
-  <script type="text/javascript" id="cvSrc" src="<%= $canvasApp %>"></script>
-  <script type="text/javascript">
-	function load() {
-		var canvas=document.createElement("canvas");
-		document.getElementById('uni-sol').children[0].replaceChild( canvas, document.getElementById("layer1") );
-		canvas.addEventListener( "click", function(evt) {
-			var git_link = document.getElementById("js-demos");
-			git_link.target = "_blank";
-			event = document.createEvent( "MouseEvent" );
-			event.initEvent( evt.type, true, true );
-			for( var e in evt ){
-				event[e] = evt[e];
-			}
-			evt.preventDefault();
-			git_link.dispatchEvent(event, true);
-		}, false );
-		canvasApp(canvas);
-		if( typeof jQuery === "function" ) {
-			jQuery('.cycle-slideshow').cycle('goto', 1);
-			jQuery('.cycle-slideshow').cycle('pause');
-		}
-		
-		if (typeof Debugger === "function") { 
-			Debugger.on = false;
-			return; 
-		} else {
-			window.Debugger = {
-				log: function() {
-					/* no debugger.js */
-				}
-			};
-		}
-	}
-  </script>
-  
-<a id="js-demos" href="https://github.com/Revlin/js-demos#readme"></a>
-
-<%
-	} elsif( defined $svgApp ) { 
-	# If URI for an SVG file is provided, initialize "uni-sol">"layer1"
-%>
-  <script type="text/javascript">
-	function load() {
-		document.getElementById("layer1").src = "<%= $svgApp %>";
-		if( typeof jQuery === "function" ) {
-			jQuery('.cycle-slideshow').cycle('goto', 1);
-			jQuery('.cycle-slideshow').cycle('pause');
-		}
-		
-		if (typeof Debugger === "function") { 
-			Debugger.on = false;
-			return; 
-		} else {
-			window.Debugger = {
-				log: function() {
-					/* no debugger.js */
-				}
-			};
-		}
-	}
-  </script>
-	
-<%
-	}
-} 
-%>
   
   <!--[if lt IE 9]><script type="text/javascript">
   try{ document.createElement('canvas').getContext('2d');} catch(e){
