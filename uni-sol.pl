@@ -279,8 +279,10 @@ __DATA__
 </head>
 <body <%{ no strict 'vars'; if( (defined $canvasApp) || (defined $svgApp) ){ %>onload="load();"<% } } %> >
   <div id="uni-sol">
-  	<div class="cycle-slideshow" style="z-index: -1"
-	  data-cycle-speed="1500" data-cycle-loop="1" data-cycle-allow-wrap="false" data-cycle-reverse="false">
+  	<div <%
+		{ no strict 'vars'; 
+			if( (defined $svgApp) ){ 
+		%>class="cycle-slideshow" style="z-index: -1" data-cycle-speed="1500" data-cycle-loop="1" data-cycle-allow-wrap="false" data-cycle-reverse="false">
   		<img id="layer0" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
   		<img id="layer1" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
   		<img id="layer2" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
@@ -290,7 +292,13 @@ __DATA__
   		<img id="layer6" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
   		<img id="layer7" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
   		<img id="layer8" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer9" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
+  		<img id="layer9" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" /><%
+			} else {
+		%> >
+  		<img id="layer1" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" /><% 
+			}
+		}
+		%>
   	</div>
   </div>
 
