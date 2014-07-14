@@ -258,7 +258,7 @@ do qq{revlin/uni-sol.pl};
 # hint: store your pass in a file outside the source tree, 
 # like /home/secret/private/auth/p@$$w0rd.pl or something )
 #
-$app->secret('p@$$w0rd');
+#$app->secret('p@$$w0rd');
 $app->start;
 
 __DATA__
