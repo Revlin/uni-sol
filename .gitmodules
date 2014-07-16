@@ -7,6 +7,3 @@
 [submodule "svg-demos"]
 	path = svg-demos
 	url = git@github.com:Revlin/svg-demos.git
-[submodule "scripts/cycle2"]
-	path = scripts/cycle2
-	url = git@github.com:Revlin/cycle2.git

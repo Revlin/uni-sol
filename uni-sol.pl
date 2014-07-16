@@ -268,13 +268,14 @@ __DATA__
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
   <title><%= title %></title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Pragma" content="no-cache">
   <meta name="viewport" content="width=640,user-scalable=no" />
-  <link rel='stylesheet' type='text/css' href='styles/new_home.css' />
+  <link rel='stylesheet' type='text/css' href='/styles/new_home.css' />
   
-  <script type="text/javascript" src="scripts/jquery.min.js"></script>
-  <script type="text/javascript" src="scripts/cycle2/build/jquery.cycle2.min.js"></script>
-  <script type="text/javascript" src="scripts/debugger.js"></script>
-  <script type="text/javascript" src="scripts/control.js"></script>
+  <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+  <script type="text/javascript" src="/scripts/cycle2/build/jquery.cycle2.min.js"></script>
+  <script type="text/javascript" src="/scripts/debugger.js"></script>
+  <script type="text/javascript" src="/scripts/control.js"></script>
   
 </head>
 <body <%{ no strict 'vars'; if( (defined $canvasApp) || (defined $svgApp) ){ %>onload="load();"<% } } %> >
@@ -283,19 +284,19 @@ __DATA__
 		{ no strict 'vars'; 
 			if( (defined $svgApp) ){ 
 		%>class="cycle-slideshow" style="z-index: -1" data-cycle-speed="1500" data-cycle-loop="1" data-cycle-allow-wrap="false" data-cycle-reverse="false">
-  		<img id="layer0" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer1" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer2" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer3" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer4" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer5" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer6" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer7" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer8" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer9" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" /><%
+  		<img id="layer0" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
+  		<img id="layer1" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
+  		<img id="layer2" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
+  		<img id="layer3" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
+  		<img id="layer4" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
+  		<img id="layer5" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
+  		<img id="layer6" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
+  		<img id="layer7" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
+  		<img id="layer8" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
+  		<img id="layer9" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" /><%
 			} else {
 		%> >
-  		<img id="layer1" alt="Blue Earth from Space" width="100%" src="images/PlanetEarthBluePlanet.jpeg" /><% 
+  		<img id="layer1" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" /><% 
 			}
 		}
 		%>
@@ -322,39 +323,31 @@ __DATA__
 	}
 }	
 		%></h1><br />
-        <span id='mode'>reading: </span>
-        <a id='read_site' href=''></a>
-      </div>
-	  
-	  <div id="content">
-	    <%= content %>
-	  </div>
-	  
-  </div>
-	  
-  <div id="control">
-  	<a id="toggle_control" href="."></a>
-  </div>
-  
-  <!--[if lt IE 9]><script type="text/javascript">
-  try{ document.createElement('canvas').getContext('2d');} catch(e){
-	document.getElementsByTagName('body')[0].onload='';
-	alert("Your browser is missing some essential features and capabilities.\n Please install a recent release of Mozilla Firefox or Google Chrome.");
-  }
-  </script><![endif]-->
+			<span id='mode'>reading: </span>
+			<a id='read_site' href=''></a>
+		</div>
 
-</body></html>
+		<div id="content">
+			<%= content %>
+			<div id='mojo-version'>
+				<p><img src="/images/triad.png" /></p>
+				<a href="/mojolicious">Mojolicious</a><br /> 
+				v<%= $version %> 
+			</div>
+			<br /><br /><br />
+		</div>
 
-@@ iframe.html.ep
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
-<html xmlns="http://www.w3.org/1999/xhtml" style="height:97%;"><head>
-  <title><%= $title %></title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link rel='stylesheet' type='text/css' href='http://uni-sol.org/styles/new_home.css' />
+	</div>
+	
+	<div id="control">
+		<a id="toggle_control" href="."></a>
+	</div>
   
-</head>
-<body style="height:100%;background-color:black;"><iframe 
-		frameborder="0" marginwidth="0" width="100%"  height="100%" 
-		style="width:100%;height:100%;" 
-		src="<%= $url %>" ></iframe>
+<!--[if lt IE 9]><script type="text/javascript">
+try{ document.createElement('canvas').getContext('2d');} catch(e){
+document.getElementsByTagName('body')[0].onload='';
+alert("Your browser is missing some essential features and capabilities.\n Please install a recent release of Mozilla Firefox or Google Chrome.");
+}
+</script><![endif]-->
+
 </body></html>
