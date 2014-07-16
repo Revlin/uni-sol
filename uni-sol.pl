@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+no warnings;
 use Mojolicious::Lite;
 use Mojo::UserAgent;
 use Mojo::Log;
@@ -29,7 +30,9 @@ my $ua = Mojo::UserAgent->new;
 	my $port  = $c->req->url->port;
 	my $base_url = '';
     ( $base_url, $port ) = $c->req->url->base =~ /(.*[\w|\-|\.]+)(\:\d+)?/;
-	$app->log->debug("$base_url, $port, $path") if( $base_url );
+	$app->log->debug("$base_url") if( $base_url );
+	$app->log->debug("$port") if( $port );
+	$app->log->debug("$path") if( $path );
 	if( ($base_url) && ($base_url =~ /global-survival\.org/) ) {
 		my $title = "Global-Survival/GSs : Netention";
 		$port = ':8080';
@@ -102,7 +105,7 @@ sub getReadme {
 sub rel2AbsURI {
 	my( $gotten, $abspath, $apppath ) = @_;
 	my $log = Mojo::Log->new();
-	$log->debug( "abspath: $abspath, apppath: $apppath \n" );
+	#$log->debug( "abspath: $abspath, apppath: $apppath \n" );
 	my (@gotten, @rendered, $responce);
 	@gotten = split( "\n", $gotten );
 
@@ -110,57 +113,57 @@ sub rel2AbsURI {
 		# Make sure that linked resources use absolute URIs
 		if ( ($fline =~ /(<a)/) and ($fline =~ /(href=){1}(\'?)(\"?)((\w|\-|\_|\/|\.|\#)+)(\'?)(\"?)/) ) {
 			my $resname = $4;
-			$log->debug( "<!--Resource $resname -->\n" );
+			#$log->debug( "<!--Resource $resname -->\n" );
 			unless( $fline =~ /(http\:|javascript\:|mailto\:|\/\/)/ ) {
 				if( $resname ) {
 					$fline =~ s/$resname/$apppath$resname/;
 				} 
 			}
-			$log->debug( $fline."\n" );
+			#$log->debug( $fline."\n" );
 			$responce = $fline;
 
 		} elsif ( ($fline =~ /(<link)/) and ($fline =~ /stylesheet/) and ($fline =~ /(href=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ) {
 			my $resname = $4;
-			$log->debug( "<!--Resource $resname -->\n" );
+			#$log->debug( "<!--Resource $resname -->\n" );
 			unless( $fline =~ /(http\:|javascript\:|mailto\:|\/\/)/ ) {
 				$fline =~ s/$resname/$apppath$resname/;
-				$log->debug( $fline."\n" );
+				#$log->debug( $fline."\n" );
 			} 
 			$responce = $fline;
 
 		} elsif ( ($fline =~ /(<script)/) and ($fline =~ /(src=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ) {
 			my $resname = $4;
-			$log->debug( "<!--Resource $resname -->\n" );
+			#$log->debug( "<!--Resource $resname -->\n" );
 			unless( $fline =~ /(http\:|javascript\:|mailto\:|\/\/)/ ) {
 				$fline =~ s/$resname/$apppath$resname/;
-				$log->debug( $fline."\n" );
+				#$log->debug( $fline."\n" );
 			} 
 			$responce = $fline;
     
 		} elsif ( ($fline =~ /(<iframe)/) and ($fline =~ /(src=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ) {
 			my $resname = $4;
-			$log->debug( "<!--Resource $resname -->\n" );
+			#$log->debug( "<!--Resource $resname -->\n" );
 			unless ($fline =~ /http\:/) {
 				$fline =~ s/$resname/$apppath$resname/;
-				$log->debug( $fline."\n" );
+				#$log->debug( $fline."\n" );
 			} 
 			$responce = $fline;
 
 		} elsif ( ($fline =~ /(<img)/s) and ($fline =~ /(src=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ){
 			my $resname = $4;
-			$log->debug( "<!--Resource $resname -->\n" );
+			#$log->debug( "<!--Resource $resname -->\n" );
 			unless ($fline =~ /http\:/) {
 				$fline =~ s/$resname/$apppath$resname/;
-				$log->debug( $fline."\n" );
+				#$log->debug( $fline."\n" );
 			} 
 			$responce = $fline;
  
 		} elsif ( ($fline =~ /(<source)/s) and ($fline =~ /(src=){1}(\'?)(\"?)((\w|\-|\_|\/|\.)+)(\'?)(\"?)/) ){
 			my $resname = $4;
-			$log->debug( "<!--Resource $resname -->\n" );
+			#$log->debug( "<!--Resource $resname -->\n" );
 			unless ($fline =~ /http\:/) {
 				$fline =~ s/$resname/$apppath$resname/;
-				$log->debug( $fline."\n" );
+				#$log->debug( $fline."\n" );
 			} 
 			$responce = $fline;
       
