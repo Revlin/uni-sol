@@ -16,9 +16,8 @@ Mojolicious v<%= $version %>
 	my ($parm_name, $parm_value) = split ': ', $parm if ( $parm ); %>
 	<span style="color:rgb(17,187,255)"><%= $parm_name %></span>: <%= $parm_value %><br />
 	<br />
-<% } %>
+<% }
 
-<% 
 { 
 	no strict 'vars';
   	if( defined $canvasApp ){ 

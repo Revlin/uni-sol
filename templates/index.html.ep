@@ -1,10 +1,10 @@
 % layout 'home';
 % title 'Uni :Sol ::Creative :Control';
-<br />
-<br />
-<a href="http://uni-sol.org/vision">Explore the Vision of Uni:Sol</a>
 <br /><br />
-
+<a href="http://uni-sol.org/vision">Explore the Vision</a>
+<br /><br />
+<a href="http://uni-sol.org/revlin">Meet the Developer</a>
+<br /><br />
 <% 
 { 
 	no strict 'vars';
@@ -50,7 +50,7 @@
 
 <%
 	} elsif( defined $svgApp ) { 
-	# If URI for an SVG file is provided, initialize "uni-sol">"layer1"
+	# If URI for an SVG file is provided, initialize "uni-sol"->"layer1"
 %>
   <script type="text/javascript">
 	function load() {

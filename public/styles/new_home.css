@@ -194,6 +194,9 @@ div#content div#mojo-version * img {
 
 div#content div.revlin h3 {
 	min-height:		180px;
+	border-top:		2px solid #7f7fff;
+	padding-top:	6px;
+	padding-right:	4px;
 }
 div#content div.revlin p {
 	margin-top: 	-10px;
