@@ -8,7 +8,15 @@
 	  };
       jQuery(window).scrollTop(2);
 	
-      jQuery('#read_site')[0].innerHTML = (window.location.host)? window.location.host : window.location;
+      jQuery('#read_site').html( function(idx) {
+		  if( window.location.host ) {
+			  this.href = "http://"+ window.location.host;
+			  return window.location.host;
+		  } else {
+			  this.href = window.location;
+			  return window.location;
+		  }
+	  });
 	  jQblink( jQblink( jQblink(jQuery('#mode'),600), 600), 600);
 	  
 	  jQuery('#toggle_control').click(function($evt) {
