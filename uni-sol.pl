@@ -272,7 +272,7 @@ __DATA__
   <title><%= title %></title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta http-equiv="Pragma" content="no-cache">
-  <meta name="viewport" content="width=640,user-scalable=no" />
+  <meta name="viewport" content="width=device-width,user-scalable=no" />
   <link rel='stylesheet' type='text/css' href='/styles/new_home.css' />
   
   <script type="text/javascript" src="/scripts/jquery.min.js"></script>
@@ -299,7 +299,7 @@ __DATA__
   		<img id="layer9" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" /><%
 			} else {
 		%> >
-  		<img id="layer1" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" /><% 
+  		<img id="layer1" alt="Blue Earth from Space" width="1024" height="576" src="/images/PlanetEarthBluePlanet.jpeg" /><% 
 			}
 		}
 		%>
