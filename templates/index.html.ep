@@ -1,9 +1,9 @@
 % layout 'home';
 % title 'Uni :Sol ::Creative :Control';
 <br /><br />
-<a href="http://uni-sol.org/vision">Explore the Vision</a>
+<a href="/vision">Explore the Vision</a>
 <br /><br />
-<a href="http://uni-sol.org/revlin">Meet the Developer</a>
+<a href="/revlin">Meet the Developer</a>
 <br /><br />
 <% 
 { 
