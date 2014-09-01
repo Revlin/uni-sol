@@ -35,7 +35,7 @@ my $ua = Mojo::UserAgent->new;
 	$app->log->debug("$path") if( $path );
 	if( ($base_url) && ($base_url =~ /global-survival\.org/) ) {
 		my $title = "Global-Survival/GSs : Netention";
-		$port = ':8080';
+		$port = ':9000';
 		getFrame($c, $base_url, $port, $path, $title);
 	}
 	
