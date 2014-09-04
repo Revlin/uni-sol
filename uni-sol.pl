@@ -11,7 +11,7 @@ use Markdent::Handler::HTMLStream::Fragment;
 
 # The hypnotoad port I use, which relies on a sytem route to redirect
 # users who connect to port 80, so I don't have to run hypnotoad as root
-app->config( hypnotoad => {listen=>['http://*:8000']} );
+app->config( hypnotoad => {listen=>['http://*:9000']} );
 
 our $version = Mojolicious->VERSION;
 
