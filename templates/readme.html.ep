@@ -74,7 +74,7 @@ my $log = Mojo::Log->new();
 		/* Find the developer heading and update the value */
 		jQuery('h1').each(function(idx) {
 			if( this.innerHTML.match(/developer/) !== null ) {
-				this.innerHTML = ( window.location.toString(/uni-sol/) !== null )?
+				this.innerHTML = ( window.location.toString().match(/uni-sol/) !== null )?
 								"Revlin John":
 								"John Hall";
 			}
