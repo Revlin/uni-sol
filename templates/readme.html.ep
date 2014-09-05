@@ -60,15 +60,9 @@ my $log = Mojo::Log->new();
 %>
   <script type="text/javascript">
 	function load() {
-		document.getElementById("layer1").src = "<%= $svgApp %>";
-		if( typeof jQuery === "function" ) {
-			jQuery('.cycle-slideshow').cycle('goto', 1);
-			jQuery('.cycle-slideshow').cycle('pause');
-		}
 		
 		if (typeof Debugger === "function") { 
 			Debugger.on = false;
-			return; 
 		} else {
 			window.Debugger = {
 				log: function() {
@@ -76,6 +70,23 @@ my $log = Mojo::Log->new();
 				}
 			};
 		}
+		
+		/* Find the developer heading and update the value */
+		jQuery('h1').each(function(idx) {
+			if( this.innerHTML.match(/developer/) !== null ) {
+				this.innerHTML = ( window.location.toString(/uni-sol/) !== null )?
+								"Revlin John":
+								"John Hall";
+			}
+		} );
+		
+		document.getElementById("layer1").src = "<%= $svgApp %>";
+		if( typeof jQuery === "function" ) {
+			jQuery('.cycle-slideshow').cycle('goto', 1);
+			jQuery('.cycle-slideshow').cycle('pause');
+		}
+		
+		return;
 	}
   </script>
 	
