@@ -1,0 +1,32 @@
+/* 
+ * width.css
+ * Rules for controlling content width on small device screens
+ */
+
+<% 
+for( my $i=639; $i>320; $i-- ) { %>
+@media (max-width: <%= $i."px" %>) {
+	div#transparent_background {
+	  margin:	0px;
+	  <%= "min-width: ".($i-20)."px;" %>
+	  <%= "width: ".($i-40)."px;" %>
+	}
+	div#home_screen {
+	  margin-left: -84px;
+	  <%= "min-width: ".($i-40)."px;" %>
+	  <%= "width: ".($i-40)."px;" %>
+	}
+	div#title {
+	  <%= "min-width: ".($i-20)."px;" %>
+	  <%= "width: ".($i-40)."px;" %>
+	 }
+	div#content {
+	  <%= "min-width: ".($i-40)."px;" %>
+	  <%= "width: ".($i-60)."px;" %>
+	 }
+	 div#content div#mojo-version {
+  	  left:	-84px;
+	}
+}
+<%
+} %>
