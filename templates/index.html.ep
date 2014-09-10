@@ -1,81 +1,8 @@
 % layout 'home';
 % title 'Uni :Sol ::Creative :Control';
+
 <br /><br />
 <a href="/vision">Explore the Vision</a>
 <br /><br />
 <a href="/revlin">Meet the Developer</a>
 <br /><br />
-<% 
-{ 
-	no strict 'vars';
-  	if( defined $canvasApp ){ 
-	# If URI for a Canvas app is provided, initialize "uni-sol">"layer1"
-%>
-  <script type="text/javascript" id="cvSrc" src="<%= $canvasApp %>"></script>
-  <script type="text/javascript">
-	function load() {
-		var canvas=document.createElement("canvas");
-		canvas.width = document.getElementById("layer1").getAttribute('width');
-		canvas.height = document.getElementById("layer1").getAttribute('height');
-		document.getElementById('uni-sol').children[0].replaceChild( canvas, document.getElementById("layer1") );
-		canvas.addEventListener( "click", function(evt) {
-			var git_link = document.getElementById("js-demos");
-			git_link.target = "_blank";
-			event = document.createEvent( "MouseEvent" );
-			event.initEvent( evt.type, true, true );
-			for( var e in evt ){
-				event[e] = evt[e];
-			}
-			evt.preventDefault();
-			git_link.dispatchEvent(event, true);
-		}, false );
-		canvasApp(canvas);
-		if( typeof jQuery === "function" ) {
-			jQuery('.cycle-slideshow').cycle('goto', 1);
-			jQuery('.cycle-slideshow').cycle('pause');
-		}
-		
-		if (typeof Debugger === "function") { 
-			Debugger.on = false;
-			return; 
-		} else {
-			window.Debugger = {
-				log: function() {
-					/* no debugger.js */
-				}
-			};
-		}
-	}
-  </script>
-  
-<a id="js-demos" href="https://github.com/Revlin/js-demos#readme"></a>
-
-<%
-	} elsif( defined $svgApp ) { 
-	# If URI for an SVG file is provided, initialize "uni-sol"->"layer1"
-%>
-  <script type="text/javascript">
-	function load() {
-		document.getElementById("layer1").src = "<%= $svgApp %>";
-		if( typeof jQuery === "function" ) {
-			jQuery('.cycle-slideshow').cycle('goto', 1);
-			jQuery('.cycle-slideshow').cycle('pause');
-		}
-		
-		if (typeof Debugger === "function") { 
-			Debugger.on = false;
-			return; 
-		} else {
-			window.Debugger = {
-				log: function() {
-					/* no debugger.js */
-				}
-			};
-		}
-	}
-  </script>
-	
-<%
-	}
-} 
-%>

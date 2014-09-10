@@ -62,6 +62,7 @@ sub getIndex {
 	my $self = shift;
 	my $URL = $self->req->url->base;
 	$self->stash( url => $URL, version => $version ); # stash the url and display in template
+	$app->log->debug( "Render index" );
 	$self->render('index');
 };
 
@@ -74,7 +75,6 @@ sub getFrame {
 
 sub getReadme {
 	my( $self, $readme ) = @_;
-	my $log = Mojo::Log->new();
 	my $URL = $self->req->url->base;
 	my( $fh, $mh, $save_line_sep );
 	my $mark2html = '';
@@ -94,10 +94,19 @@ sub getReadme {
 	close $fh;
 	close $mh;
 	
+	my( $apppath ) = $readme =~ /([\w\-]+\/)\w+\.md/;
+	$apppath = $URL.'/'.$apppath if( $apppath );
+	$apppath = $URL unless( defined $apppath );
+	$mark2html = rel2AbsURI( 
+		$mark2html, 
+		$URL.'/',
+		$apppath
+	);
+	
 	$self->stash( 
-		url => $URL, 
-		version => $version, 
-		mark2html => $mark2html 
+		url => $URL,
+		version => $version,
+		mark2html => $mark2html
 	);
 	$self->render('readme');
 };
@@ -244,11 +253,11 @@ get '/mojolicious' => sub {
 		) 
 	); 
 	$self->stash( version => $version ); # stash the url and display in template
-	$self->stash( canvasApp => 'js-demos/scripts/koch.js' );
 	$self->render('mojo', request=>$request);
 };
 
 # Import routes from submodules (if they exist)
+do qq{script/styles.pl};
 #do qq{my-mojo/uni-sol.pl};
 do qq{js-demos/uni-sol.pl};
 do qq{svg-demos/uni-sol.pl};
@@ -263,94 +272,3 @@ do qq{revlin/uni-sol.pl};
 #
 #$app->secret('p@$$w0rd');
 $app->start;
-
-__DATA__
-
-@@ layouts/home.html.ep
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-  <title><%= title %></title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta name="viewport" content="width=device-width,user-scalable=no" />
-  <link rel='stylesheet' type='text/css' href='/styles/new_home.css' />
-  
-  <script type="text/javascript" src="/scripts/jquery.min.js"></script>
-  <script type="text/javascript" src="/scripts/cycle2/build/jquery.cycle2.min.js"></script>
-  <script type="text/javascript" src="/scripts/debugger.js"></script>
-  <script type="text/javascript" src="/scripts/control.js"></script>
-  
-</head>
-<body <%{ no strict 'vars'; if( (defined $canvasApp) || (defined $svgApp) ){ %>onload="load();"<% } } %> >
-  <div id="uni-sol">
-  	<div <%
-		{ no strict 'vars'; 
-			if( (defined $svgApp) ){ 
-		%>class="cycle-slideshow" style="z-index: -1" data-cycle-speed="1500" data-cycle-loop="1" data-cycle-allow-wrap="false" data-cycle-reverse="false">
-  		<img id="layer0" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer1" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer2" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer3" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer4" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer5" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer6" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer7" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer8" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" />
-  		<img id="layer9" alt="Blue Earth from Space" width="100%" src="/images/PlanetEarthBluePlanet.jpeg" /><%
-			} else {
-		%> >
-  		<img id="layer1" alt="Blue Earth from Space" width="1024" height="576" src="/images/PlanetEarthBluePlanet.jpeg" /><% 
-			}
-		}
-		%>
-  	</div>
-  </div>
-
-  <div id='transparent_background'></div>
-  <div id='home_screen'>
-
-      <div id='trademark'>
-        Uni:Sol::<br />
-        Creative:<br />
-        Control:<br />     
-      </div>
-      <div id='title' class='titles'>
-        <h1><%
-{ 
-	no strict 'vars';
-	if( defined $header ) {
-		%><%= $header %><%
-	} else { 
-		%>Make Control<%
-		1;
-	}
-}	
-		%></h1><br />
-			<span id='mode'>reading: </span>
-			<a id='read_site' href=''></a>
-		</div>
-
-		<div id="content">
-			<%= content %>
-			<div id='mojo-version'>
-				<p><img src="/images/triad.png" /></p>
-				<a href="/mojolicious">Mojolicious</a><br /> 
-				v<%= $version %> 
-			</div>
-			<br /><br /><br />
-		</div>
-
-	</div>
-	
-	<div id="control">
-		<a id="toggle_control" href="."></a>
-	</div>
-  
-<!--[if lt IE 9]><script type="text/javascript">
-try{ document.createElement('canvas').getContext('2d');} catch(e){
-document.getElementsByTagName('body')[0].onload='';
-alert("Your browser is missing some essential features and capabilities.\n Please install a recent release of Mozilla Firefox or Google Chrome.");
-}
-</script><![endif]-->
-
-</body></html>
