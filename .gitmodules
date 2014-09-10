@@ -1,6 +1,6 @@
 [submodule "revlin"]
 	path = revlin
-	url = git@uni-sol.org/revlin.git
+	url = git@uni-sol.org:revlin/revlin.git
 [submodule "js-demos"]
 	path = js-demos
 	url = git@github.com:Revlin/js-demos.git
