@@ -258,7 +258,7 @@ get '/mojolicious' => sub {
 
 # Import routes from submodules (if they exist)
 do qq{script/styles.pl};
-#do qq{my-mojo/uni-sol.pl};
+do qq{my-mojo/uni-sol.pl};
 do qq{js-demos/uni-sol.pl};
 do qq{svg-demos/uni-sol.pl};
 do qq{revlin/uni-sol.pl};

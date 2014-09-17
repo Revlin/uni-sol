@@ -14,7 +14,7 @@ sub myMojo {
 	my (@gotten, @rendered);
 	my ($responce, $gotten);
 	my $apppath = $self->req->url->base.'/my-mojo/';
-	my $abspath = 'http://uni-sol.ca:81/';
+	my $abspath = 'http://blogs.perl.org/users/revlin_john/';
 	if( $getp ) {
 		$gotten = $ua->get($abspath."?p=$getp")->res->dom;
 	} elsif( $geta ) {
