@@ -11,7 +11,7 @@ use Markdent::Handler::HTMLStream::Fragment;
 
 # The hypnotoad port I use, which relies on a sytem route to redirect
 # users who connect to port 80, so I don't have to run hypnotoad as root
-app->config( hypnotoad => {listen=>['http://*:9000']} );
+app->config( hypnotoad => {listen=>['http://*:9090']} );
 
 our $version = Mojolicious->VERSION;
 
@@ -22,24 +22,6 @@ push @{$static->paths}, ($ENV{PWD});
 
 # Create new instance of Mojo::UserAgent to use in routes
 my $ua = Mojo::UserAgent->new;
-
-  hook before_dispatch => sub {
-    my $c = shift;
-    my $app = $c->app;
-	my $path = $c->req->url;
-	my $port  = $c->req->url->port;
-	my $base_url = '';
-    ( $base_url, $port ) = $c->req->url->base =~ /(.*[\w|\-|\.]+)(\:\d+)?/;
-	$app->log->debug("$base_url") if( $base_url );
-	$app->log->debug("$port") if( $port );
-	$app->log->debug("$path") if( $path );
-	if( ($base_url) && ($base_url =~ /global-survival\.org/) ) {
-		my $title = "Global-Survival/GSs : Netention";
-		$port = ':9090';
-		getFrame($c, $base_url, $port, $path, $title);
-	}
-	
-  };
 
   hook after_render => sub {
     my ($c, $output, $format) = @_;
