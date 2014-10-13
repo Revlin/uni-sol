@@ -3,24 +3,20 @@
 get '/my-mojo' => sub {
 	# Redirect to My Mojolicious blog
 	my $self = shift;
-	my $yr = '';
-	my $mn = '';
-	my $ar = '';
+	
+	myMojo($self);
+};
+
+get '/my-mojo/*path' => sub {
+	# Redirect to My Mojolicious blog
+	my $self = shift;
+	my( $yr, $mn, $ar ) = $self->stash('path') =~ m/(\d+)\/(\d+)\/([\w|\-]+\.\w+)$/;
+	$log->debug("\nPATH:". $yr .", ". $mn .", ". $ar ."\n" );
 	my ($getp, $geta) = (0, 0);
 	$getp = $self->param('p') if( $self->param('p') );
 	$geta = $self->param('p') if( $self->param('a') );
 	
 	myMojo($self, $yr, $mn, $ar, $getp, $geta);
-};
-
-get '/my-mojo/#year/#month/#article' => sub {
-	# Redirect to My Mojolicious blog
-	my $self = shift;
-	my $yr = $self->stash('year');
-	my $mn = $self->stash('month');
-	my $ar = $self->stash('article');
-	
-	myMojo($self, $yr, $mn, $ar);
 };
 
 sub myMojo {
