@@ -1,4 +1,4 @@
-package Uni::Sol::Creative;
+package Uni::Sol;
 use warnings;
 use strict;
 

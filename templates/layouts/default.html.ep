@@ -42,9 +42,9 @@
   <div id='home_screen'>
 
       <div id='trademark'>
-        Uni:Sol::<br />
+        Uni::Sol:<br />
         Creative:<br />
-        Control:<br />     
+        &nbsp;Control:<br />     
       </div>
       <div id='title' class='titles'>
         <h1><%
@@ -102,7 +102,8 @@
 			git_link.target = "_blank";
 			event = document.createEvent( "MouseEvent" );
 			event.initEvent( evt.type, true, true );
-			for( var e in evt ){
+			for( var e
+			in evt ){
 				event[e] = evt[e];
 			}
 			evt.preventDefault();

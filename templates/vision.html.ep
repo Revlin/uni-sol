@@ -1,4 +1,4 @@
-% layout 'home';
+% layout 'default';
 % title 'Uni :Sol ::Vision';
 
 <h1 id="text_title" style="display:none;">Vision
