@@ -238,7 +238,7 @@ get '/mojolicious' => sub {
 	$self->render('mojo', request=>$request);
 };
 
-# Import routes from submodules (if they exist)
+# Import routes from sub-scripts (git submodules, if they exist)
 do qq{script/styles.pl};
 do qq{my-mojo/uni-sol.pl};
 do qq{js-demos/uni-sol.pl};
