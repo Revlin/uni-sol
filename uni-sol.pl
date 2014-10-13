@@ -21,7 +21,8 @@ my $static = $app->static;
 push @{$static->paths}, ($ENV{PWD});
 
 # Create new instance of Mojo::UserAgent to use in routes
-my $ua = Mojo::UserAgent->new;
+our $ua = Mojo::UserAgent->new;
+our $log = $app->log;
 
   hook after_render => sub {
     my ($c, $output, $format) = @_;
