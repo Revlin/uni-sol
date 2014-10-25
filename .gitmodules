@@ -10,6 +10,3 @@
 [submodule "lib/Uni"]
 	path = lib/Uni
 	url = http://uni-sol.org:7990/scm/gfxi/uni-sol.git
-[submodule "public/scripts/cycle2"]
-	path = public/scripts/cycle2
-	url = git@github.com:Revlin/cycle2.git
