@@ -7,8 +7,9 @@
   <link rel='stylesheet' type='text/css' href='/main.css' />
   <link rel='stylesheet' type='text/css' href='/width.css' />
   
-  <script type="text/javascript" src="/scripts/jquery.min.js"></script>
-  <script type="text/javascript" src="/scripts/cycle2/build/jquery.cycle2.min.js"></script>
+  <script type="text/javascript" src="/libs/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/libs/jquery-cycle/build/jquery.cycle2.min.js"></script>
+  
   <script type="text/javascript" src="/scripts/debugger.js"></script>
   <script type="text/javascript" src="/scripts/control.js"></script>
   
