@@ -9,6 +9,8 @@
   
   <script type="text/javascript" src="/libs/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="/libs/jquery-cycle/build/jquery.cycle2.min.js"></script>
+ 
+  <script type="text/javascript" src="/libs/angular/angular.min.js"></script>
   
   <script type="text/javascript" src="/scripts/debugger.js"></script>
   <script type="text/javascript" src="/scripts/control.js"></script>
