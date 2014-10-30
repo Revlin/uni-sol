@@ -1,3 +1,6 @@
+Debugger.on = true;
+Debugger.log( "Make Control" );
+
 jQuery(function() {
 	/* Simple interface controls for home screen */
 

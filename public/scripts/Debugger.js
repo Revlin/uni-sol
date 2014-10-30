@@ -3,7 +3,12 @@
 /* Debugger Function */
 var Debugger = function Debugger() {};
 
-Debugger.on = false;
+Debugger.on = {
+	value: false,
+	get getValue() {},
+	set setValue(value) {}
+}
+
 Debugger.iPadOn = false;
 
 Debugger.log = function( m, r ) {
