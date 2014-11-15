@@ -25,7 +25,7 @@ body {
   margin: 				0 0 0 0;
   padding: 				0 0 0 0;
   border:				0px transparent;
-  font-family: 			Inconsolata, Comfortaa;
+  font-family: 			Comfortaa, Consolas; /*, Inconsolata;*/
   font-size: 			1em;
   color: 				#e3ddff;
   text-align: 			left;
