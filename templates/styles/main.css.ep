@@ -2,22 +2,23 @@
 File: main.css
 Note: uni-sol.ca default style sheet 
 */
-
+/*
 @font-face {
   font-family: 			"Comfortaa";
   font-weight: 			normal;
   font-style: 			normal;
-  src: url("/fonts/comfortaa-light-webfont.woff") format("woff"),
-    url("/fonts/comfortaa-light-webfont.ttf") format("truetype");
+  src: url("fonts/comfortaa-light-webfont.woff") format("woff"),
+    url("fonts/comfortaa-light-webfont.ttf") format("truetype");
 }
 
 @font-face {
   font-family:			"Comfortaa";
   font-weight: 			bold;
   font-style: 			normal;
-  src: url("/fonts/comfortaa-regular-webfont.woff") format("woff"),
-    url("/fonts/comfortaa-regular-webfont.ttf") format("truetype");
+  src: url("fonts/comfortaa-regular-webfont.woff") format("woff"),
+    url("fonts/comfortaa-regular-webfont.ttf") format("truetype");
 }
+*/
 
 body {
   background-color:		#000;
@@ -25,7 +26,7 @@ body {
   margin: 				0 0 0 0;
   padding: 				0 0 0 0;
   border:				0px transparent;
-  font-family: 			Comfortaa, Consolas; /*, Inconsolata;*/
+  font-family: 			Comfortaa, Consolas, Inconsolata;
   font-size: 			1em;
   color: 				#e3ddff;
   text-align: 			left;
@@ -224,7 +225,7 @@ div#control #toggle_control {
 	min-height:		22px;
 	min-width: 		256px;
 	max-width:		256px;
-	background-image: url('../images/txt_bubble.png');
+	background-image: url('images/txt_bubble.png');
 }
 
 * #uni-sol {
