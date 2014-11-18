@@ -26,7 +26,7 @@ body {
   margin: 				0 0 0 0;
   padding: 				0 0 0 0;
   border:				0px transparent;
-  font-family: 			Consolas, Comfortaa;
+  font-family: 			Comfortaa, Consolas, Courier ;
   font-size: 			1em;
   color: 				#e3ddff;
   text-align: 			left;
@@ -159,7 +159,7 @@ span#mode {
 }
 
 div#content {
-  width: 				460px;
+  width: 				472px;
   min-width: 			360px;
   max-height: 			80px;
   margin: 				0 0 0 86px;
@@ -197,18 +197,21 @@ div#content div.revlin h3 {
 	min-height:		180px;
 	border-top:		2px solid #7f7fff;
 	padding-top:	6px;
+	padding-left:	8px;
 	padding-right:	4px;
 }
 div#content div.revlin p {
 	margin-top: 	-10px;
 	margin-bottom:	60px;
+	padding-left:	4px;
 }
 div#content div.revlin * img {
 	position:		relative;
 	float:			right;
 	width:			320px;
-	margin-top: 	-2px;
-	margin-bottom: 	-1px;
+	margin-top: 	2px;
+	margin-bottom: 	12px;
+	margin-right:	-4px;
 }
 
 div#control {

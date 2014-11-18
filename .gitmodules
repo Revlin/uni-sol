@@ -3,10 +3,10 @@
 	url = git@uni-sol.org:revlin/revlin.git
 [submodule "js-demos"]
 	path = js-demos
-	url = http://uni-sol.org:7990/scm/gfxi/js-demos.git
+	url = https://revlin@github.com/Revlin/js-demos.git
 [submodule "svg-demos"]
 	path = svg-demos
-	url = http://uni-sol.org:7990/scm/gfxi/svg-demos.git
+	url = https://revlin@github.com/Revlin/svg-demos.git
 [submodule "lib/Uni"]
 	path = lib/Uni
 	url = http://uni-sol.org:7990/scm/gfxi/uni-sol.git

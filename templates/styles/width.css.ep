@@ -13,16 +13,16 @@ for( my $i=639; $i>320; $i-- ) { %>
 	}
 	div#home_screen {
 	  margin-left: -84px;
-	  <%= "width: ".($i-40)."px;" %>
-	  <%= "min-width: ".($i-40)."px;" %>
+	  <%= "width: ".($i-16)."px;" %>
+	  <%= "min-width: ".($i-32)."px;" %>
 	}
 	div#title {
-	  <%= "width: ".($i-20)."px;" %>
-	  <%= "min-width: ".($i-40)."px;" %>
+	  <%= "width: ".($i-16)."px;" %>
+	  <%= "min-width: ".($i-32)."px;" %>
 	 }
 	div#content {
-	  <%= "width: ".($i-40)."px;" %>
-	  <%= "min-width: ".($i-60)."px;" %>
+	  <%= "width: ".($i-16)."px;" %>
+	  <%= "min-width: ".($i-32)."px;" %>
 	 }
 	 div#content div#mojo-version {
   	  left:	-84px;

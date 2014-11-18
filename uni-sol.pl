@@ -24,8 +24,19 @@ push @{$static->paths}, ($ENV{PWD});
 our $ua = Mojo::UserAgent->new;
 our $log = $app->log;
 
-  hook after_render => sub {
-    my ($c, $output, $format) = @_;
+  hook( before_dispatch => sub {
+	my( $self ) = shift @_;
+	my $host = $self->req->headers->host;
+	my $user_agent = $self->req->headers->user_agent;
+	$self->stash( 
+		host => $host,
+		user_agent => $user_agent 
+	);
+  } );
+	
+
+  hook( after_render => sub {
+    my( $c, $output, $format ) = @_;
 
     # Check if "gzip => 1" has been set in the stash
     #return unless $c->stash->{gzip};
@@ -38,7 +49,7 @@ our $log = $app->log;
     $c->res->headers->content_encoding('gzip');
     gzip $output, \my $compressed;
     $$output = $compressed;
-  };
+  } );
   
   
 sub getIndex {
