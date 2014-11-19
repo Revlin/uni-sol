@@ -9,7 +9,7 @@
 	url = https://revlin@github.com/Revlin/svg-demos.git
 [submodule "lib/Uni"]
 	path = lib/Uni
-	url = http://uni-sol.org:7990/scm/gfxi/uni-sol.git
+	url =  https://revlin@github.com/Uni-Sol/uni.git
 [submodule "public/libs/jquery-cycle"]
 	path = public/libs/jquery-cycle
 	url = https://github.com/Revlin/cycle2.git
