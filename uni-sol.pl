@@ -114,18 +114,13 @@ sub rel2AbsURI {
 
 	for my $fline (@gotten) {
 		# Make sure that linked resources use absolute URIs
-		if( ($fline =~ /(<a)/) and ($fline =~ /(href=){1}(\'?)(\"?)((\w|\-|\_|\/|\.|\:|\#)+)(\'?)(\"?)/) ) {
-			my $resname = $4 if( $4 );
-			$log->debug("\n". "<!--Resource $resname -->\n");
-			unless( $resname =~ /(\.|http|javascript|mailto|\/\/)/ ) {
-				#if( $resname =~ /^\/(.+)/ ) {
-				#	my $relname = $1;
-				#	$fline =~ s/$resname/$absname\/$relname/g;
-				#} else {
-					$fline =~ s/$resname/$apppath$resname/g;
-				#}
-			} else {
-				$fline =~ s/$abspath$resname/$apppath$resname/g;
+		if ( ($fline =~ /(<a)/) and ($fline =~ /(href=){1}(\'?)(\"?)((\w|\-|\_|\/|\.|\#)+)(\'?)(\"?)/) ) {
+			my $resname = $4;
+			$log->debug( "<!--Resource $resname -->\n" );
+			unless( $fline =~ /(http\:|javascript\:|mailto\:|\/\/)/ ) {
+				if( $resname ) {
+					$fline =~ s/$resname/$apppath$resname/;
+				} 
 			}
 			$log->debug( $fline."\n" );
 			$responce = $fline;
