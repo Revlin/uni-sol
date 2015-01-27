@@ -55,7 +55,7 @@
         <h1><%
 { 
 	no strict 'vars';
-	if( (defined $host) && ($host =~ /real-currents/)) {
+	if( (defined $host) && ($host =~ /real-currents/) ) {
 		%><span style="color:#00FF00">Real</span><span style="color:rgb(17,187,255)">~Currents</span><%
 	} elsif( defined $header ) {
 		%><%= $header %><%
