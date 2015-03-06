@@ -1,5 +1,5 @@
 % layout 'default';
-% title 'Uni :Sol ::Creative :Control';
+% title 'Uni::Sol => Mojolicious';
 
 <br /><br /><br />
 Uni:Sol is built on the <a href="http://mojolicio.us" target="_blank">Mojolicious real-time web framework!</a><br />
