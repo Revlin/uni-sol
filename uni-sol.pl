@@ -1,5 +1,8 @@
-#!/usr/bin/perl
-no warnings;
+#!/usr/bin/env perl
+use 5.10.1;
+use strict;
+use warnings;
+
 use Mojolicious::Lite;
 use Mojo::UserAgent;
 use Mojo::Log;
