@@ -7,7 +7,8 @@
   <link rel='stylesheet' type='text/css' href='http://uni-sol.org/styles/new_home.css' />
   
 </head>
-<body style="height:100%;background-color:black;overflow:hidden;"><iframe 
+<body style="height:100%;background-color:black;overflow:hidden;">
+	<iframe 
 		frameborder="0" marginwidth="0" width="100%"  height="100%" 
 		style="width:100%;height:100%;overflow:hidden;" 
 		src="<%= $url %>" ></iframe>

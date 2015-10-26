@@ -1,0 +1,4 @@
+% layout 'refresh';
+% title 'Uni::Sol => Creative::Control';
+
+<img alt="Uni::Sol" width="100%" src="/images/PlanetEarthBluePlanet.png?today=<%= time;%>" />
