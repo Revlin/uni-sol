@@ -14,6 +14,6 @@
 } else { 
 %><a href="/vision">Explore the Vision</a>
 <br /><br />
-<a href="/dev">Meet the Developer</a>
-} %>
-<br /><br />
+<a href="/dev">Meet the Developer</a><% 
+} 
+%><br /><br />
